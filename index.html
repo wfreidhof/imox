@@ -39,26 +39,37 @@
         Additional Notes:
         <textarea name="notes" rows="4"></textarea>
       </label>
+
+      <!-- Optional hidden field to customize email subject -->
+      <input type="hidden" name="_subject" value="New IMOX Booking Inquiry" />
+
       <button type="submit">Submit Inquiry</button>
     </form>
   </section>
-<form
-  action="https://formspree.io/f/mldoqbdy"
-  method="POST"
->
-  <label>
-    Your email:
-    <input type="email" name="email">
-  </label>
-  <label>
-    Your message:
-    <textarea name="message"></textarea>
-  </label>
-  <!-- your other form fields go here -->
-  <button type="submit">Send</button>
-</form>
+
   <footer>
     <p>© 2025 IMOX</p>
   </footer>
+
+  <script>
+    // Optional success message without page reload
+    const form = document.querySelector('form');
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const response = await fetch(form.action, {
+        method: form.method,
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+      });
+
+      if (response.ok) {
+        alert('Thank you! Your inquiry has been sent.');
+        form.reset();
+      } else {
+        alert('Oops! There was a problem submitting your form.');
+      }
+    });
+  </script>
 </body>
 </html>
