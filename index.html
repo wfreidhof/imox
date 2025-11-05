@@ -84,7 +84,7 @@
   <form id="whatsapp-form">
     <input type="text" name="name" placeholder="Your Name" required>
     <input type="email" name="email" placeholder="Your Email" required>
-    <input type="date" name="eventDate" required>
+    <input type="date" name="eventDate" id="eventDate" required>
     <textarea name="message" placeholder="Booking Details / Message" required></textarea>
     <button type="submit">Send via WhatsApp</button>
   </form>
@@ -96,17 +96,24 @@
 
 <script>
   const form = document.getElementById('whatsapp-form');
-  const phoneNumber = '50432436262'; // Honduran number, no "+" or dashes
+  const phoneNumber = '50432436262'; // Honduran number
 
   form.addEventListener('submit', function(e) {
     e.preventDefault();
 
     const name = encodeURIComponent(form.name.value);
     const email = encodeURIComponent(form.email.value);
-    const eventDate = encodeURIComponent(form.eventDate.value);
+    const eventDate = encodeURIComponent(document.getElementById('eventDate').value);
     const message = encodeURIComponent(form.message.value);
 
-    const whatsappMessage = `Hi! My name is ${name}%0AEmail: ${email}%0AEvent Date: ${eventDate}%0AMessage: ${message}`;
+    // WhatsApp message with clear labels
+    const whatsappMessage = 
+      `📩 New Booking Request:%0A` +
+      `Name: ${name}%0A` +
+      `Email: ${email}%0A` +
+      `Event Date: ${eventDate}%0A` +
+      `Message: ${message}`;
+
     const whatsappURL = `https://wa.me/${phoneNumber}?text=${whatsappMessage}`;
 
     window.open(whatsappURL, '_blank');
