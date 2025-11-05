@@ -1,75 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>IMOX | Booking</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ImoxBand - Book a Session</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      color: #222;
+    }
+    header {
+      background: #222;
+      color: #fff;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+    main {
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      margin-top: 0;
+      text-align: center;
+      color: #222;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    input, textarea {
+      padding: 0.75rem;
+      font-size: 1rem;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    button {
+      padding: 0.75rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 4px;
+      background: #25D366;
+      color: #fff;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+    button:hover {
+      background: #128C3C;
+    }
+    footer {
+      text-align: center;
+      margin: 2rem 0;
+      font-size: 0.9rem;
+      color: #666;
+    }
+  </style>
 </head>
 <body>
-  <header class="hero">
-    <img src="assets/imox-logo.png" alt="IMOX Logo" class="logo" />
-    <h1>IMOX</h1>
-    <p>Booking Inquiry</p>
-  </header>
 
-  <section class="form-section">
-    <form action="https://formspree.io/f/mldoqbdy" method="POST">
-      <label>
-        Name / Venue Contact:
-        <input type="text" name="name" required />
-      </label>
-      <label>
-        Venue Name:
-        <input type="text" name="venue" required />
-      </label>
-      <label>
-        Date of Event:
-        <input type="date" name="date" required />
-      </label>
-      <label>
-        Budget:
-        <input type="text" name="budget" />
-      </label>
-      <label>
-        Email:
-        <input type="email" name="email" required />
-      </label>
-      <label>
-        Additional Notes:
-        <textarea name="notes" rows="4"></textarea>
-      </label>
+<header>
+  <h1>ImoxBand</h1>
+  <p>Book a session or send us a message via WhatsApp!</p>
+</header>
 
-      <!-- Optional hidden field to customize email subject -->
-      <input type="hidden" name="_subject" value="New IMOX Booking Inquiry" />
+<main>
+  <form id="whatsapp-form">
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="email" placeholder="Your Email" required>
+    <textarea name="message" placeholder="Booking Details / Message" required></textarea>
+    <button type="submit">Send via WhatsApp</button>
+  </form>
+</main>
 
-      <button type="submit">Submit Inquiry</button>
-    </form>
-  </section>
+<footer>
+  &copy; 2025 ImoxBand. All rights reserved.
+</footer>
 
-  <footer>
-    <p>© 2025 IMOX</p>
-  </footer>
+<script>
+  const form = document.getElementById('whatsapp-form');
+  const phoneNumber = '50432436262'; // Honduran number, no "+" or dashes
 
-  <script>
-    // Optional success message without page reload
-    const form = document.querySelector('form');
-    form.addEventListener('submit', async (event) => {
-      event.preventDefault();
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
 
-      const response = await fetch(form.action, {
-        method: form.method,
-        body: new FormData(form),
-        headers: { Accept: 'application/json' },
-      });
+    const name = encodeURIComponent(form.name.value);
+    const email = encodeURIComponent(form.email.value);
+    const message = encodeURIComponent(form.message.value);
 
-      if (response.ok) {
-        alert('Thank you! Your inquiry has been sent.');
-        form.reset();
-      } else {
-        alert('Oops! There was a problem submitting your form.');
-      }
-    });
-  </script>
+    const whatsappMessage = `Hi! My name is ${name}. Email: ${email}. Message: ${message}`;
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${whatsappMessage}`;
+
+    // Open WhatsApp in a new tab
+    window.open(whatsappURL, '_blank');
+  });
+</script>
+
 </body>
 </html>
