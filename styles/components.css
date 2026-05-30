@@ -2,7 +2,7 @@
    COMPONENTS - Reusable UI Elements
    ============================================ */
 
-@import url('global.css');
+/* No need to import here - handled in index.html */
 
 /* ============================================
    HEADER / NAVIGATION
@@ -177,11 +177,13 @@ nav a:hover {
 
 .form-section {
   background-color: var(--color-dark-secondary);
+  padding: var(--space-3xl) 0;
 }
 
 .form-container {
   max-width: var(--max-width-form);
   margin: 0 auto;
+  padding: var(--space-lg);
 }
 
 .form-group {
@@ -247,6 +249,11 @@ nav a:hover {
    BAND MEMBERS SECTION
    ============================================ */
 
+#band {
+  padding: var(--space-3xl) 0;
+  background-color: var(--color-dark-primary);
+}
+
 .band-members {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -273,7 +280,7 @@ nav a:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: var(--font-size-2xl);
+  font-size: 4rem;
   color: var(--color-text-muted);
   overflow: hidden;
 }
@@ -324,6 +331,7 @@ footer {
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: var(--space-2xl);
   margin-bottom: var(--space-2xl);
+  padding: 0 var(--space-lg);
 }
 
 .footer-section h3 {
@@ -353,6 +361,8 @@ footer {
 .footer-bottom {
   text-align: center;
   padding-top: var(--space-lg);
+  padding-left: var(--space-lg);
+  padding-right: var(--space-lg);
   border-top: 1px solid var(--color-dark-tertiary);
   color: var(--color-text-muted);
   font-size: var(--font-size-sm);
@@ -390,6 +400,7 @@ footer {
 
 .about {
   background-color: var(--color-dark-secondary);
+  padding: var(--space-3xl) var(--space-lg);
 }
 
 .about h2 {
@@ -400,6 +411,7 @@ footer {
 .about p {
   font-size: var(--font-size-lg);
   line-height: var(--line-height-relaxed);
+  color: var(--color-text-secondary);
 }
 
 /* ============================================
